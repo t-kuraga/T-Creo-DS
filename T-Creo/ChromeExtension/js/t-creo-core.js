@@ -3,10 +3,6 @@
  */
 export class AbstractTCreoListener {
     /**
-     * Listener type
-     */
-    listenerType;
-    /**
      * Extension Id
      */
     extensionId
@@ -51,7 +47,7 @@ export class AbstractTCreoListener {
     submit(data) {
         chrome.runtime.sendMessage(this.extensionId, {
             action: "submit",
-            params: { listenerType: this.listenerType, data }
+            params: { domain: window.location.hostname, data }
         }, this.handleBackgroundMessage);
     }
 
@@ -75,10 +71,6 @@ export class AbstractTCreoListener {
     }
 }
 
-
-export class AbstractTCreoParser {
-
-}
 
 /**
  * TCreo data loader base class

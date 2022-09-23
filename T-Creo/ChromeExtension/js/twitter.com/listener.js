@@ -3,7 +3,7 @@ import { AbstractTCreoListener } from '../t-creo-core.js';
 /**
  * TCreo Twitter Listener
  */
-export class TCreoTwitterListener extends AbstractTCreoListener {
+export default class TCreoTwitterListener extends AbstractTCreoListener {
 
     constructor(extId) {
         super(extId);
@@ -42,5 +42,3 @@ export class TCreoTwitterListener extends AbstractTCreoListener {
     }
 
 }
-
-export default TCreoTwitterListener;

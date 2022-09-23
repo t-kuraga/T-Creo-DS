@@ -1,4 +1,4 @@
-import { TCreoTwitterParser } from './twitter/parser.js';
+import { TCreoTwitterParser } from './twitter.com/loader.js';
 
 chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
     handleMessage(message).then(sendResponse);
