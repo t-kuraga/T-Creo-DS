@@ -9,31 +9,20 @@ export class AbstractTCreoListener {
     /**
      * Validates whether a request has valid data
      * @abstract
-     * @delegate
      * @param {XMLHttpRequest} xhr Target request
      * @returns True if the request has valid data. False otherwise
      */
-    hasValidData(xhr){
+    hasValidData(xhr) {
         throw "Not implemented";
     }
-    /**
-     * Formats the captured data to be send to the background process
-     * @abstract
-     * @delegate
-     * @param {string} dataString Target data string
-     * @returns {object} FormattedData
-     */
-    mapData(dataString){
-        throw "Not implemented";
-    }
+
     /**
     * Handles messages from the background process
     * @abstract
-    * @delegate
     * @param {Object} message Message from background process
     */
-    handleBackgroundMessage(message){
-        throw "Not implemented"; 
+    handleBackgroundMessage(message) {
+        throw "Not implemented";
     }
 
     constructor(extId) {
@@ -47,14 +36,15 @@ export class AbstractTCreoListener {
     submit(data) {
         chrome.runtime.sendMessage(this.extensionId, {
             action: "submit",
-            params: { domain: window.location.hostname, data }
+            domain: window.location.hostname,
+            params: { data }
         }, this.handleBackgroundMessage);
     }
 
     /**
      * Gets data from a request
      * @param {XMLHttpRequest} xhr Target request 
-     * @returns True if data was fetched. False otherwise
+     * @returns {bool} True if data was fetched. False otherwise
      */
     getXHRData(xhr) {
         if (this.hasValidData(xhr) && xhr.responseType != 'blob' && xhr.responseText) {
@@ -76,20 +66,17 @@ export class AbstractTCreoListener {
  * TCreo data loader base class
  */
 export class AbstractTCreoLoader {
-    /**
-     * loader type
-     */
-    loaderType;
+    constructor() {
+
+    }
+
     /**
      * Gets score input data from the provided listener input
      * @abstract
-     * @delegate
-     * @param {Object}  Data from xhr request
+     * @param {string} dataString Data from xhr request
      */
-    map;
-
-    constructor() {
-
+    map(dataString) {
+        throw "Not implemented";
     }
 }
 
@@ -142,4 +129,4 @@ export function startXhrListener() {
     return listeners;
 }
 
-export default { AbstractTCreoListener, startXhrListener }
+export default { AbstractTCreoListener, AbstractTCreoLoader, startXhrListener }

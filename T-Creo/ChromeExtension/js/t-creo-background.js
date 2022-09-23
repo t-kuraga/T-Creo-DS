@@ -1,9 +1,10 @@
-import { TCreoTwitterParser } from './twitter.com/loader.js';
+import { getLoader } from './t-creo-registered-loaders.js'; 
 
 chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
     handleMessage(message).then(sendResponse);
     return true; // return true to indicate you want to send a response asynchronously
 });
+
 
 /**
  * Handles a message from the listeners
@@ -14,7 +15,10 @@ async function handleMessage(message) {
     try {
         switch (message.action) {
             case 'submit':
-                console.log(message);
+                const loader = getLoader(message.domain);
+                const data = loader.map(message.params.data);
+                console.log("Found: ", data);
+
                 const result = true;
                 return { success: true, result }
             default:

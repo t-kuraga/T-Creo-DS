@@ -11,7 +11,7 @@ export default class TCreoTwitterListener extends AbstractTCreoListener {
 
     /**
      * Validates whether a request has valid data
-     * @abstract
+     * @override
      * @param {XMLHttpRequest} xhr   
      * @returns True if the request has valid data. False otherwise
      */
@@ -21,24 +21,10 @@ export default class TCreoTwitterListener extends AbstractTCreoListener {
 
     /**
      * Handles messages from the background process
-     * @abstract
-     * @delegate
+     * @override
      * @param {Object} message Message from background process
      */
     handleBackgroundMessage(message) {
         console.log(message);
     }
-
-    /**
-     * Formats the captured data to be send to the background process
-     * @abstract
-     * @delegate
-     * @param {string} dataString Target data string
-     * @returns {object} FormattedData
-     */
-    mapData(dataString) {
-        console.log(dataString);
-        return JSON.parse(dataString);
-    }
-
 }
