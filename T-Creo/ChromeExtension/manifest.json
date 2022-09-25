@@ -6,7 +6,7 @@
     "content_scripts": [
         {
           "matches": ["https://*.twitter.com/*"],
-          "css": ["css/style.css"],
+          "css": ["css/t-creo-style.css"],
           "js": ["js/t-creo-start.js"],
           "run_at": "document_start"
         }
@@ -24,7 +24,8 @@
     "web_accessible_resources": [{
       "resources": [
         "js/t-creo-core.js",
-        "*listener.js"
+        "*listener.js",
+        "css/t-creo-style.css"
       ],
       "matches": ["https://*.twitter.com/*"]
     }],
@@ -37,6 +38,5 @@
       "https://*.twitter.com/*"
     ],
     "action": {
-      "default_popup": "html/popup.html"
     }
   }

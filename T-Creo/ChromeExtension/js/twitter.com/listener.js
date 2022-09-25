@@ -76,6 +76,13 @@ export default class TCreoTwitterListener extends AbstractTCreoListener {
         scoreLink.className = link.className;
         scoreContainer.className = link.parentElement.className;
 
+        // Add a T-Creo class depending on the results
+        scoreLink.classList.add(
+            score > 0.8 ? "t-creo-error" :
+            score > 0.5 ? "t-creo-warning" :
+            "t-creo-success"
+        );
+
         // Append nodes
         scoreContainer.appendChild(scoreLink);
         link.parentElement.parentElement.appendChild(link.parentElement.previousSibling.cloneNode(true)); // dot separator
