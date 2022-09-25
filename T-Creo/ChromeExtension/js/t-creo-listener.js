@@ -1,11 +1,11 @@
-import { startXhrListener } from './t-creo-core.js';
+import { startXhrMonitor, addListener } from './t-creo-core.js';
 
 // Initialize system
-const listeners = startXhrListener();
+startXhrMonitor();
 
 // Add a listener for the current domain
 import(`./${window.location.hostname}/listener.js`)
     .then(({ default: Listener }) => {
         let extId = new URL(import.meta.url).searchParams.get('extId');
-        listeners.push(new Listener(extId));
+        addListener(new Listener(extId));
     });

@@ -83,11 +83,16 @@ export class AbstractTCreoLoader {
 }
 
 /**
+ * Initial XHR Queue
+ */
+const _initialXhrQueue = [];
+const _listeners = [];
+
+/**
  * Adds listeners to XHR requests
  * @returns {AbstractTCreoListener[]} listeners Target listeners
  */
-export function startXhrListener() {
-    const listeners = [];
+export function startXhrMonitor() {
     var XHR = XMLHttpRequest.prototype;
 
     // Capture current XHR functions
@@ -119,16 +124,33 @@ export function startXhrListener() {
     function processRequest() {
         try {
             if ((this.responseType === '' || this.responseType === 'text') && this.responseText) {
+                // Check if no listeners have been added
+                if (!_listeners.length) {
+                    _initialXhrQueue.push(this);
+                    return;
+                }
+
                 // Evaluate each listener in order
-                for (let i = 0; i < listeners.length; i++)
-                    if (listeners[i].getXHRData(this)) return;
+                for (let i = 0; i < _listeners.length; i++)
+                    if (_listeners[i].getXHRData(this)) return;
             }
         } catch (error) {
             console.error(error); //Ignore errors and continue with execution
         }
     }
-
-    return listeners;
 }
 
-export default { AbstractTCreoListener, AbstractTCreoLoader, startXhrListener }
+/**
+ * Adds a listener to the XHR listeners set
+ * @param {AbstractTCreoListener} listener 
+ */
+export function addListener(listener) {
+    // Add the listener
+    _listeners.push(listener);
+
+    // Analyze previous requests
+    for (let i = 0; i < _initialXhrQueue.length; i++)
+        listener.getXHRData(_initialXhrQueue[i]);
+}
+
+export default { AbstractTCreoListener, AbstractTCreoLoader, startXhrMonitor, addListener }
