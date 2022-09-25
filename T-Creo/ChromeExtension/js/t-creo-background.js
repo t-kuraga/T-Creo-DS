@@ -22,7 +22,7 @@ async function handleMessage(message) {
                 console.debug(ids);
                 console.debug(data);
 
-                const result = true;
+                const result = ids.map(id => ({ id, score: Math.random() }));
                 return { success: true, result }
             default:
                 return { success: false, error: "Invalid action" };

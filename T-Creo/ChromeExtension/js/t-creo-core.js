@@ -34,11 +34,12 @@ export class AbstractTCreoListener {
      * @param {any} data Target data set 
      */
     submit(data) {
+        const self = this;
         chrome.runtime.sendMessage(this.extensionId, {
             action: "submit",
             domain: window.location.hostname,
             params: { data }
-        }, this.handleBackgroundMessage);
+        }, m => self.handleBackgroundMessage(m));
     }
 
     /**
