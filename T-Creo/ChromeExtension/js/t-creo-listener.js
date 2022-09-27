@@ -1,4 +1,4 @@
-import { startXhrMonitor, addListener } from './t-creo-core.js';
+import { startXhrMonitor, addListener } from './t-creo-client-core.js';
 
 // Initialize system
 startXhrMonitor();

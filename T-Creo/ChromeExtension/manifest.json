@@ -23,14 +23,14 @@
     ],
     "web_accessible_resources": [{
       "resources": [
-        "js/t-creo-core.js",
+        "js/t-creo-client-core.js",
         "*listener.js",
         "css/t-creo-style.css"
       ],
       "matches": ["https://*.twitter.com/*"]
     }],
     "externally_connectable": {
-      "ids": ["mgoeidjiogljgbhfjobmkioaoaoaehef"],
+      "ids": ["mabibngjipnkpameiadgjjdjoobhfkoe"],
       "matches": ["https://*.twitter.com/*"],
       "accepts_tls_channel_id": false
     },

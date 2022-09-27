@@ -1,4 +1,4 @@
-import { AbstractTCreoListener } from '../t-creo-core.js';
+import { AbstractTCreoListener } from '../t-creo-client-core.js';
 
 /**
  * TCreo Twitter Listener
