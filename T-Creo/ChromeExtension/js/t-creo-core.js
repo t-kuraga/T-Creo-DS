@@ -17,4 +17,17 @@ export class AbstractTCreoLoader {
     }
 }
 
+export class AbstractTCreoCalculationService {
+    /**
+     * Calculates scores for a data set
+     * @abstract
+     * @param {object[]} dataSet Target data set
+     * @returns {Promise<object[]>} Scores
+     */
+     async calculateScores (dataSet) {
+        throw "Not implemented";
+    }
+
+}
+
 export default { AbstractTCreoLoader }
